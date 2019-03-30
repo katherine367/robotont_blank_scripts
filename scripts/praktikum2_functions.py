@@ -22,8 +22,31 @@ def closing():
 #######################
 # YOUR FUNCTIONS HERE #
 #######################
+def otsesoit(kord, kiirus):
+    for i in range(0, kord):
+        vel_msg.linear.x = kiirus
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
 
+def pooramine(kestus, kiirus):
+    for i in range(0, kestus):
+        vel_msg.angular.z = kiirus
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
 
+def kuljesoit(kestus, kiirus):
+    for i in range(0, kestus):
+        vel_msg.linear.y = kiirus
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
+
+def stops(kestus):
+    for i in range(0, kestus):
+        vel_msg.linear.x = 0
+        vel_msg.linear.y = 0
+        vel_msg.angular.z = 0
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
 ###########################
 # YOUR FUNCTIONS HERE END #
 ###########################
@@ -49,6 +72,16 @@ def move():
         vel_msg.angular.z = 0
         velocity_publisher.publish(vel_msg)
         rospy.sleep(0.1)
+
+        otsesoit(30, 0.2)
+        stops(5)
+        kuljesoit(15, -0.2)
+        stops(5)
+        otsesoit(15, -0.2)
+        stops(5)
+        kuljesoit(15, 0.2)
+        stops(5)
+        pooramine(18, -0.98)
         ######################
         # YOUR CODE HERE END #
         ######################
